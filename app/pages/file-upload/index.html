@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>VidBender - Upload</title>
+    <link rel="stylesheet" href="./../_globals/globals.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="nav">
+        <div class="nav-wrapper">
+          <div class="logo-wrapper">
+            <a href="/pages/home">
+              <img
+                class="hamburguer-menu"
+                src="img/button-desktop-navigation.svg"
+              />
+            </a>
+            <div class="logo">
+              <a href="/pages/home">
+                <div class="logo-text">VidBender</div>
+              </a>
+              <div class="logo-hub">
+                <div class="hub-text">hub</div>
+              </div>
+            </div>
+          </div>
+          <div class="search-wrapper">
+            <div class="search-button">
+              <img class="search-icon" src="img/iconamoon-search-light-1.svg" />
+            </div>
+            <input class="input-search" placeholder="Busca VidBender" />
+          </div>
+          <img class="profile-icon" src="img/link.svg" />
+        </div>
+      </div>
+      <div class="upload-section">
+        <div id="fileUploadWrapper" class="upload">
+          <img class="img" src="img/group-17-1.png" />
+          <input type="file" id="fileUpload" class="hide" accept="video/mp4" />
+          <div id="btnUploadVideos" class="upload-button">
+            Selecione o vídeo para upload
+          </div>
+        </div>
+        <div id="fileInfo" class="hide uploading-container">
+          <div class="uploading-info">
+            <div class="frame-6">
+              <div class="rectangle-3"></div>
+            </div>
+            <div id="fileName" class="file-name">Video.mp4</div>
+            <div id="fileSize" class="file-size">1.19 GB</div>
+          </div>
+          <div class="uploading-preview">
+            <canvas id="preview-144p"></canvas>
+            <p class="process-time">
+              <span id="elapsed">Processo iniciado há 0 segundos</span> <br />
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <div class="footer-row">
+          <div class="footer-logo-text">VidBender</div>
+          <div class="footer-logo-hub">
+            <div class="hub-text">hub</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mp4box@0.5.2/dist/mp4box.all.min.js"></script>
+    <script src="./src/app.js" type="module"></script>
+  </body>
+</html>
+
