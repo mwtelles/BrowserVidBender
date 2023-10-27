@@ -326,3 +326,10 @@ progress {
   background-size: auto;
   background-image: url("./img/player.svg");
 }
+
+.video-preview {
+  max-height: 300px;
+  max-width: 500px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
