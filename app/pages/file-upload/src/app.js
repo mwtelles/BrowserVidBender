@@ -1,48 +1,29 @@
-import Clock from './deps/clock.js';
+import Clock from "./deps/clock.js";
+import View from "./views.js";
+const view = new View();
+const clock = new Clock();
 
-const fileUpload = document.getElementById('fileUpload')
-const btnUploadVideo = document.getElementById('btnUploadVideos')
-const fileSize = document.getElementById('fileSize')
-const fileInfo = document.getElementById('fileInfo')
-const txtfileName = document.getElementById('fileName')
-const fileUploadWrapper = document.getElementById('fileUploadWrapper')
-const elapsed = document.getElementById('elapsed')
+let took = "";
 
+view.configureOnFileChange((file) => {
+  clock.start((time) => {
+    took = time;
+    view.updateElapsedTime(`Processo iniciado há ${time}`);
+  });
 
-fileUpload.addEventListener('change', onChange)
-btnUploadVideo.addEventListener('click', () => {
-    // trigger file input
-    fileUpload.click()
-})
-let took = ''
+  setTimeout(() => {
+    clock.stop();
+    view.updateElapsedTime(`O processo levou ${took.replace("atrás", "")}`);
+  }, 5000);
+});
 
-function parseBytesIntoMBAndGB(bytes) {
-    const mb = bytes / (1024 * 1024)
-    // if mb is greater than 1024, then convert to GB
-    if (mb > 1024) {
-        // rount to 2 decimal places
-        return `${Math.round(mb / 1024)}GB`
-    }
-    return `${Math.round(mb)}MB`
+async function fakeFetch() {
+    const filePath = 'videos/frag_bunny.mp4';
+    const response = await fetch(filePath);
+    const file = new File([await response.blob()], filePath, { type: 'video/mp4', lastModified: Date.now() });
+    const event = new Event('change');
+    Reflect.defineProperty(event, 'target', { value: { files: [file] } });
+    document.getElementById('fileUpload').dispatchEvent(event);
 }
-const clock = new Clock()
 
-function onChange(e) {
-    const file = e.target.files[0]
-    const { name, size } = file
-    txtfileName.innerText = name
-    fileSize.innerText = parseBytesIntoMBAndGB(size)
-
-    fileInfo.classList.remove('hide')
-    fileUploadWrapper.classList.add('hide')
-
-    clock.start((time) => {
-        took = time;
-        elapsed.innerText = `Processo iniciado há ${time}`
-    })
-
-    setTimeout(() => {
-        clock.stop()
-        elapsed.innerText = `O processo levou ${took.replace('atrás', '')}`
-    }, 5000)
-}
+fakeFetch();
