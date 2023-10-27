@@ -12,6 +12,10 @@ export default class View {
     this.configureBtnUploadClick();
   }
 
+  getCanvas() {
+    return this.#canvas.transferControlToOffscreen();
+  }
+
   parseBytesIntoMBAndGB(bytes) {
     const mb = bytes / (1024 * 1024);
     // if mb is greater than 1024, then convert to GB
