@@ -6,13 +6,15 @@ const clock = new Clock();
 const worker = new Worker('./src/worker/worker.js', { type: 'module' });
 
 worker.onerror = (error) => {
-    console.log('error worker', error);
+    console.log(' ', error);
 }
 
 worker.onmessage = ({ data }) => {
     if (data.status !== 'done') return;
     clock.stop();
-    view.updateElapsedTime(`O processo levou ${took.replace("atrás", "")}`);
+    view.updateElapsedTime(`O processo levou ${took.replace("há", "")}`);
+    if (!data.buffers) return;
+    view.downloadBlobAsFile(data.buffers, data.filename);
 }
 
 let took = "";
@@ -26,7 +28,7 @@ view.configureOnFileChange((file) => {
 
   clock.start((time) => {
     took = time;
-    view.updateElapsedTime(`Processo iniciado há ${time}`);
+    view.updateElapsedTime(`Processo iniciado ${time}`);
   });
 });
 

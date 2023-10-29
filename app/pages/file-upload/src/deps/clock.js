@@ -1,7 +1,7 @@
 export default class Clock {
 
     #getUnit(ms) {
-        const rtf = new Intl.RelativeTimeFormat('en', { numeric: 'auto' });
+        const rtf = new Intl.RelativeTimeFormat('pt-BR', { numeric: 'auto' });
         const seconds = Math.floor((ms - Date.now()) / 1000);
 
         if (seconds < 60) {
