@@ -3,31 +3,32 @@ import MP4Demuxer from "./mp4Demuxer.js";
 import CanvasRenderer from "./canvasRenderer.js";
 
 const qvgaConstraints = {
-  video: { width: { exact: 320 }, height: { exact: 240 } },
-};
-
+  width: 320,
+  height: 240
+}
 const vgaConstraints = {
-  video: { width: { exact: 640 }, height: { exact: 480 } },
-};
-
+  width: 640,
+  height: 480
+}
 const hdConstraints = {
-  video: { width: { exact: 1280 }, height: { exact: 720 } },
-};
+  width: 1280,
+  height: 720
+}
 
 const encoderConfig = {
   ...qvgaConstraints,
-  codec: "vp09.00.10.08",
+  bitrate: 10e6,
+  // WebM
+  codec: 'vp09.00.10.08',
   pt: 4,
-  hardwareAcceleration: "prefer-software",
+  hardwareAcceleration: 'prefer-software',
 
   // MP4
   // codec: 'avc1.42002A',
   // pt: 1,
   // hardwareAcceleration: 'prefer-hardware',
   // avc: { format: 'annexb' }
-
-  bitrate: 10e6,
-};
+}
 
 const mp4Demuxer = new MP4Demuxer();
 const videoProcessor = new VideoProcessor({
